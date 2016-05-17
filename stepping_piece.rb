@@ -5,11 +5,7 @@ class SteppingPiece < Piece
   end
 end
 
-def in_bounds?(pos)
-  row, col = pos
 
-  row < 8 && col < 8 && row >= 0 && col >= 0
-end
 
 class Knight < SteppingPiece
   MOVES = [

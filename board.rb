@@ -1,8 +1,9 @@
 require_relative 'piece'
+
 class Board
   attr_reader :grid
   def initialize
-    @grid = Array.new(8){Array.new(8, Singleton::NullPiece.instance)  }
+    @grid = Array.new(8){Array.new(8, NullPiece.instance)  }
 
     populate
   end
@@ -15,17 +16,17 @@ class Board
 
     rows << @grid[-2]
     @grid.first.each_index do |i|
-      @grid.first[i] = Piece.new([0, i])
+      @grid.first[i] = Piece.new([0, i], self)
     end
     @grid[1].each_index do |i|
-      @grid[1][i] = Piece.new([1, i])
+      @grid[1][i] = Piece.new([1, i], self)
     end
     @grid.last.each_index do |i|
-      @grid.last[i] =  Piece.new([-1, i])
+      @grid.last[i] =  Piece.new([-1, i], self)
     end
 
     @grid[-2].each_index do |i|
-      @grid[-2][i] =  Piece.new([-2, i])
+      @grid[-2][i] =  Piece.new([-2, i], self)
     end
   end
 

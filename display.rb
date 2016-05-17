@@ -1,5 +1,8 @@
 require "colorize"
 require_relative "cursorable"
+require_relative 'piece'
+require_relative 'board'
+
 
 class Display
   include Cursorable
