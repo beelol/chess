@@ -44,6 +44,6 @@ class Display
   end
 end
 
-b = Board.new
-display = Display.new(b)
-display.render
+# b = Board.new
+# display = Display.new(b)
+# display.render

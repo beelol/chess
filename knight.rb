@@ -27,6 +27,6 @@ class Knight < SteppingPiece
   end
 
   def to_s
-    "k".colorize(@color)
+    "k"
   end
 end

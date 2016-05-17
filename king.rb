@@ -27,26 +27,15 @@ class King < SteppingPiece
   end
 
   def to_s
-    "K".colorize(@color)
+    "K"
   end
 
   def in_check?
-    enemy_moves = []
-    if color == :white
-      board.grid.each do |row|
-        row.each do |piece|
-          enemy_moves << piece.moves if piece.color == :black
-        end
-      end
-    else
-      board.grid.each do |row|
-        row.each do |piece|
-          enemy_moves << piece.moves if piece.color == :white
-        end
-      end
-    end
+    enemy_moves.include?(pos)
+  end
 
-    enemy_moves.include?(pos) : true : false
+  def checkmate?
+    in_check? && moves.empty?
   end
 
   def enemy_moves
@@ -65,7 +54,7 @@ class King < SteppingPiece
         end
       end
     end
-    
+
     enemy_moves
   end
 end

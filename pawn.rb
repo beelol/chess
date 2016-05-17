@@ -7,7 +7,7 @@ class Pawn < Piece
     [-1, -1],
     [-1, 1]
   ]
-  
+
   def moves
     result << color == :black ? [1, 0] : [-1, 0]
 
@@ -19,6 +19,6 @@ class Pawn < Piece
   end
 
   def to_s
-    "p".colorize(@color)
+    "p"
   end
 end

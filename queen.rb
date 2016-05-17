@@ -6,6 +6,6 @@ class Queen < SlidingPiece
   end
 
   def to_s
-    "Q".colorize(@color)
+    "Q"
   end
 end

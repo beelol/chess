@@ -2,7 +2,7 @@ require_relative 'piece'
 
 class SlidingPiece < Piece
   def moves
-
+    vertical_moves + horizontal_moves
   end
 
   def vertical_moves
