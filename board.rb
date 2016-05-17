@@ -85,4 +85,8 @@ class Board
     @grid[row][col] = val
   end
 
+  def in_check?(player)
+  
+  end
+
 end

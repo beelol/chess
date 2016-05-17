@@ -18,7 +18,7 @@ class Piece
   end
 
   def to_s
-    "o".colorize(@color)
+    "o"
   end
 
   def enemy_color?(color)
