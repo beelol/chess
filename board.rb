@@ -1,7 +1,9 @@
-require_relative 'piece'
+require_relative 'piece_manifest'
+
 
 class Board
   attr_reader :grid
+
   def initialize
     @grid = Array.new(8){Array.new(8, NullPiece.instance)  }
 
@@ -9,25 +11,43 @@ class Board
   end
 
   def populate
-    rows = []
 
-    rows << @grid.first
-    rows << @grid[1]
-
-    rows << @grid[-2]
     @grid.first.each_index do |i|
-      @grid.first[i] = Piece.new([0, i], self)
-    end
-    @grid[1].each_index do |i|
-      @grid[1][i] = Piece.new([1, i], self)
-    end
-    @grid.last.each_index do |i|
-      @grid.last[i] =  Piece.new([-1, i], self)
+      @grid.first[i] = back_row(:black)[i]
     end
 
-    @grid[-2].each_index do |i|
-      @grid[-2][i] =  Piece.new([-2, i], self)
+    @grid.last.each_index do |i|
+      @grid.last[i] = back_row(:white)[i]
     end
+
+    set_pawns_white
+    set_pawns_black
+  end
+
+  def set_pawns_white
+    @grid[-2].each_index do |i|
+      @grid[-2][i] = Pawn.new([-2, i], self, :white)
+    end
+  end
+
+  def set_pawns_black
+    @grid[1].each_index do |i|
+      @grid[1][i] = Pawn.new([1, i], self, :black)
+    end
+  end
+
+  def back_row(color)
+    x = color == :black ? 0 : 7
+    [
+      Rook.new([x, 0], self, color),
+    Knight.new([x, 1], self, color),
+    Bishop.new([x, 2], self, color),
+    Queen.new([x, 3], self, color),
+    King.new([x, 4], self, color),
+    Bishop.new([x, 5], self, color),
+    Knight.new([x, 6], self, color),
+    Rook.new([x, 7], self, color)
+  ]
   end
 
   def move(start, end_pos)

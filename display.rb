@@ -20,12 +20,8 @@ class Display
 
   def build_row(row, i)
     row.map.with_index do |piece, j|
-      color_options = colors_for(i, j)
-      if piece.nil?
-        " ".colorize(color_options)
-      else
-        piece.to_s.colorize(color_options)
-      end
+      color_options = colors_for(i, j).merge(color: piece.color)
+      piece.to_s.colorize(color_options)
     end
   end
 
@@ -41,7 +37,7 @@ class Display
   end
 
   def render
-    system("clear")
+    # system("clear")
     puts "Fill the grid!"
     puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
     build_grid.each { |row| puts row.join }

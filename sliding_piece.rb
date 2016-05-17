@@ -87,33 +87,3 @@ class SlidingPiece < Piece
     positions
   end
 end
-
-class Queen < SlidingPiece
-  def move_dirs
-    [:horizontal, :vertical, :diagonal]
-  end
-
-  def to_s
-    "Q"
-  end
-end
-
-class Rook < SlidingPiece
-  def move_dirs
-    [:horizontal, :vertical]
-  end
-
-  def to_s
-    "r"
-  end
-end
-
-class Bishop < SlidingPiece
-  def move_dirs
-    [:diagonal]
-  end
-
-  def to_s
-    "b"
-  end
-end

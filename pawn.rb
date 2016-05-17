@@ -7,15 +7,9 @@ class Pawn < Piece
     [-1, -1],
     [-1, 1]
   ]
-
-  def initialize(pos, board, up_facing)
-    @pos = pos
-    @board = board
-    @up_facing = up_facing
-  end
-
+  
   def moves
-    result << up_facing ? [1, 0] : [-1, 0]
+    result << color == :black ? [1, 0] : [-1, 0]
 
     MOVES.each do |move|
       result << move if enemy_at?(move)
@@ -24,6 +18,7 @@ class Pawn < Piece
     result.select { |move| in_bounds?(move) }
   end
 
-
-
+  def to_s
+    "p".colorize(@color)
+  end
 end
