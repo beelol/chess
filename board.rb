@@ -1,6 +1,5 @@
 require_relative 'piece_manifest'
 
-
 class Board
   include Enumerable
 
@@ -10,8 +9,7 @@ class Board
 
   def initialize(fill = true)
     if fill
-      @grid = Array.new(8){Array.new(8, NullPiece.instance)  }
-      populate
+      fill_grid
     end
   end
 
@@ -21,6 +19,11 @@ class Board
         yield piece
       end
     end
+  end
+
+  def fill_grid
+    @grid = Array.new(8){Array.new(8, NullPiece.instance)  }
+    populate
   end
 
   def populate
@@ -81,19 +84,21 @@ class Board
 
   def move(start, end_pos)
     begin
-
-      raise "Invalid position" unless valid_pos(start) && valid_end_pos?(end_pos)
-      # or !piece.valid_move?(end_pos)
+      raise "Invalid position" unless valid_pos?(start) && valid_end_pos?(end_pos)
+      move!(start, end_pos)
     rescue
-
+      puts "Try again"
       retry
     end
-
   end
 
   def move!(start, end_pos)
     piece = self[start]
-    clear_pos(start)
+
+    self[start] = nil
+    self[start] = NullPiece.instance
+    self[end_pos] = nil
+
     self[end_pos] = piece
   end
 
@@ -102,17 +107,22 @@ class Board
   end
 
   def valid_pos?(pos)
-    in_bounds?(pos) && @grid[pos].exists
+    in_bounds?(pos) && self[pos].exists? && self[pos].color == @current_player.color
   end
 
   def valid_end_pos?(pos)
-    in_bounds?(pos) && @grid[pos].color != @current_player.color
+    in_bounds?(pos) && self[pos].color != @current_player.color
   end
 
   def in_bounds?(pos)
     row, col = pos
+    #
+    # puts row < @grid.length
+    # puts col < @grid[0].length
+    # puts row >= 0
+    # puts col >= 0
 
-    row < @grid.length && col < @grid.length &&
+    row < @grid.length && col < @grid[0].length &&
     row >= 0 && col >= 0
   end
 

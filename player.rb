@@ -1,7 +1,7 @@
 require_relative 'piece_manifest'
 class Player
 
-  attr_accessor :king
+  attr_accessor :king, :color
 
   def initialize(color, display)
     @color = color
@@ -16,7 +16,7 @@ class Player
     king.checkmate?
   end
 
-  def move
+  def get_input
     result = nil
 
     until result
@@ -25,6 +25,10 @@ class Player
     end
 
     result
+  end
+
+  def move
+    get_input
   end
 
 end

@@ -9,7 +9,8 @@ class Pawn < Piece
   ]
 
   def moves
-    result << color == :black ? [1, 0] : [-1, 0]
+    result = []
+    result << (color == :black ? [1, 0] : [-1, 0])
 
     MOVES.each do |move|
       result << move if enemy_at?(move)

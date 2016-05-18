@@ -1,0 +1,19 @@
+# Earth earth = new Earth()
+
+# earth.cause_tornado
+
+---
+
+using Earth;
+
+public class Earth
+{
+
+  public static void CauseTornado()
+  {
+    Console.WriteLine("run")
+  }
+
+}
+
+Earth.CauseTornado()

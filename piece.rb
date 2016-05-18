@@ -1,7 +1,7 @@
 require 'singleton'
 
 class Piece
-  attr_reader :pos
+  attr_reader :pos, :board
 
   attr_accessor :color
 
@@ -14,8 +14,8 @@ class Piece
   def in_bounds?(pos)
     row, col = pos
 
-    row_max = @board.length
-    col_max = @board[0].length
+    row_max = @board.grid.length
+    col_max = @board.grid[0].length
 
     row < row_max && col < col_max && row >= 0 && col >= 0
   end
@@ -28,7 +28,7 @@ class Piece
     @color != color
   end
 
-  def enemy_at(pos)
+  def enemy_at?(pos)
     board[pos].enemy_color?(color)
   end
 
@@ -56,7 +56,7 @@ class Piece
     player.check_in?
   end
 
-  def exists
+  def exists?
     true
   end
 end
@@ -76,7 +76,7 @@ class NullPiece
     false
   end
 
-  def exists
+  def exists?
     false
   end
 end

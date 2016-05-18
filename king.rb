@@ -13,10 +13,10 @@ class King < SteppingPiece
 
   def moves
     result = []
+    row, col = @pos
 
     MOVES.each do |move|
       y, x = move
-      row, col = @pos
 
       if in_bounds?([y + row, x + col])
         result << [y + row, x + col]
@@ -42,13 +42,13 @@ class King < SteppingPiece
     enemy_moves = []
 
     if color == :white
-      board.grid.each do |row|
+      @board.grid.each do |row|
         row.each do |piece|
           enemy_moves << piece.moves if piece.color == :black
         end
       end
     else
-      board.grid.each do |row|
+      @board.grid.each do |row|
         row.each do |piece|
           enemy_moves << piece.moves if piece.color == :white
         end

@@ -41,9 +41,7 @@ class Display
     puts "Fill the grid!"
     puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
     build_grid.each { |row| puts row.join }
+
+    puts @cursor_pos.inspect
   end
 end
-
-# b = Board.new
-# display = Display.new(b)
-# display.render
